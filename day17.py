@@ -4,25 +4,19 @@ def part_1(steps=DEFAULT_INPUT):
     current_position = 0
     buffer = [0]
     for i in range(1, 2018):
-        current_position += steps
-        current_position %= len(buffer)
+        current_position = (current_position + steps) % len(buffer)
         buffer.insert(current_position + 1, i)
         current_position += 1
-        current_position %= len(buffer)
-    return buffer[current_position + 1]
+    return buffer[(current_position + 1) % len(buffer)]
 
 def part_2(steps=DEFAULT_INPUT):
     current_position = 0
     pos_one = None
-    len_buffer = 1
     for i in range(1, 50000001):
-        current_position += steps
-        current_position %= len_buffer
+        current_position = (current_position + steps) % i
         if current_position == 0:
             pos_one = i
-        len_buffer += 1
         current_position += 1
-        current_position %= len_buffer
     return pos_one
 
 if __name__ == '__main__':
